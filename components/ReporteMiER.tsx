@@ -201,6 +201,11 @@ export default function ReporteMiER() {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
     
+    // Contar trámites únicos disponibles
+    const tramitesUnicos = Object.keys(tramitesPopulares).length
+    // Sumar los 15 nuevos trámites del 2026
+    const totalTramitesDisponibles = tramitesUnicos + 15
+    
     return {
       totalTramites,
       estadosMap,
@@ -208,7 +213,9 @@ export default function ReporteMiER() {
       exitosos,
       tasaExito,
       topTramites,
-      totalOrganismos: Object.keys(organismosMap).length
+      totalOrganismos: Object.keys(organismosMap).length,
+      totalTramitesDisponibles,
+      tramitesUnicos
     }
   }, [])
 
@@ -652,11 +659,19 @@ export default function ReporteMiER() {
                 </div>
 
                 <div className="stat-card">
-                  <h3>Estados Diversos</h3>
-                  <div className="number">{Object.keys(tramiteMetrics.estadosMap).length}</div>
-                  <div className="label">Tipos de estado</div>
+                  <h3>Trámites Disponibles</h3>
+                  <div className="number">{tramiteMetrics.totalTramitesDisponibles}</div>
+                  <div className="label">Tipos de trámites en la plataforma</div>
+                </div>
+
+                <div className="stat-card">
+                  <h3>Trámites en Proceso</h3>
+                  <div className="number">9</div>
+                  <div className="label">En proceso de capacitación e implementación</div>
                 </div>
               </div>
+
+              
 
               <div className="section">
                 <h2>Distribución de Trámites por Estado</h2>
@@ -798,7 +813,54 @@ export default function ReporteMiER() {
                   </ul>
                 </div>
               </div>
+
+              <div className="section">
+                <h2>🔄 Trámites en Proceso de Implementación</h2>
+                <div className="executive-summary">
+                  <p style={{ marginBottom: '15px', fontSize: '1.1em' }}>Los siguientes trámites se encuentran actualmente en proceso de capacitación e implementación para estar disponibles próximamente en la plataforma:</p>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      📶 <strong style={{ color: '#2E7D32' }}>Puntos de Activación de WiFi</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Secretaría de Modernización</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      📋 <strong style={{ color: '#2E7D32' }}>Registro de Proveedores</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Dirección General de Contrataciones del Estado</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      ♿ <strong style={{ color: '#2E7D32' }}>Certificado de Discapacidad</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>IPRODI</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      🔍 <strong style={{ color: '#2E7D32' }}>Solicitud de Inspección</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Defensa al Consumidor</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      👥 <strong style={{ color: '#2E7D32' }}>Registro de Personal de Carga para Tarjeta Social</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Dirección de Políticas Alimentarias</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      📝 <strong style={{ color: '#2E7D32' }}>Actualización de Datos de Proveedores de Pauta de la Provincia</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Secretaría de Comunicación y Prensa</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      📊 <strong style={{ color: '#2E7D32' }}>Pre Celebración de Asamblea Ordinaria y Extraordinaria</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Dirección de Inspección de Personas Jurídicas</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      📄 <strong style={{ color: '#2E7D32' }}>Presentación Post Celebración de Asamblea</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Dirección de Inspección de Personas Jurídicas</span>
+                    </li>
+                    <li style={{ marginBottom: '12px', color: '#2c3e50' }}>
+                      🏢 <strong style={{ color: '#2E7D32' }}>Sociedad por Acciones Simplificadas</strong><br/>
+                      <span style={{ marginLeft: '28px', color: '#555', fontSize: '0.95em' }}>Dirección de Inspección de Personas Jurídicas</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
+            
 
             <div className="footer">
               <p>Gobierno de Entre Ríos - Plataforma Mi Entre Ríos</p>
@@ -862,7 +924,7 @@ export default function ReporteMiER() {
         }
         .stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          grid-template-columns: repeat(5, 1fr);
           gap: 20px;
           margin-bottom: 40px;
         }
