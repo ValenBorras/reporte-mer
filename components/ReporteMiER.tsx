@@ -660,7 +660,7 @@ export default function ReporteMiER() {
 
                 <div className="stat-card">
                   <h3>Trámites Disponibles</h3>
-                  <div className="number">{tramiteMetrics.totalTramitesDisponibles}</div>
+                  <div className="number">35</div>
                   <div className="label">Tipos de trámites en la plataforma</div>
                 </div>
 
